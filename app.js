@@ -17,14 +17,17 @@ input.addEventListener('keypress', e => {
   // if guessed number is smaller the correct answer
   if (guessedNumber < myNumber) {
     indicator.innerText = 'Too Low';
+    input.value = '';
   }
   // if the guessed number is larger
   else if (guessedNumber > myNumber) {
     indicator.innerText = 'Too High';
+    input.value = '';
   }
   // NaN
   else if (Number.isNaN(guessedNumber)) {
     indicator.innerText = 'Not a Number!';
+    input.value = '';
     return;
   }
   // if it is correct
@@ -40,7 +43,6 @@ input.addEventListener('keypress', e => {
   }
 
   previousNumber = guessedNumber;
-  input.value = '';
 });
 
 restart.addEventListener('click', () => {
