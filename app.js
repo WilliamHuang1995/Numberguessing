@@ -3,13 +3,13 @@ console.log(myNumber);
 var previousNumber;
 var input = document.getElementById('guessedNumber');
 var indicator = document.getElementById('indicator');
-var check = document.getElementById('button');
 var body = document.getElementsByTagName('BODY')[0];
 var restart = document.getElementById('restart');
 var first = document.getElementById('first');
 var guessedNumber;
 
-check.addEventListener('click', () => {
+input.addEventListener('keypress', e => {
+  if (e.keyCode !== 13) return;
   //get the guessed number
   first.style.display = 'none';
   guessedNumber = Number(document.getElementById('guessedNumber').value);
@@ -22,6 +22,11 @@ check.addEventListener('click', () => {
   else if (guessedNumber > myNumber) {
     indicator.innerText = 'Too High';
   }
+  // NaN
+  else if (Number.isNaN(guessedNumber)) {
+    indicator.innerText = 'Not a Number!';
+    return;
+  }
   // if it is correct
   else {
     // show correct!
@@ -30,13 +35,12 @@ check.addEventListener('click', () => {
     restart.style.display = 'block';
     // set editable to false
     input.disabled = true;
-    // check disable
-    check.style.display = 'none';
     body.style.background = 'white';
     first.style.display = 'block';
   }
 
   previousNumber = guessedNumber;
+  input.value = '';
 });
 
 restart.addEventListener('click', () => {
@@ -45,14 +49,12 @@ restart.addEventListener('click', () => {
   restart.style.display = 'none';
   // set editable to false
   input.disabled = false;
-  // check disable
-  check.style.display = 'inline';
   myNumber = generateNewNumber();
 });
 
 function setColor() {
   console.log(previousNumber);
-  console.log(guessedNumber);
+  console.log(typeof guessedNumber);
   //absolute value
   if (previousNumber) {
     var pdistance = Math.abs(previousNumber - myNumber);
