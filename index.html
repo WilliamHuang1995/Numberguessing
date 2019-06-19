@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div>
+    <div class="flex">
       <p>I have a number between 1 and 1000. Can you guess my number?</p>
       <p id="first">Please enter your first guess.</p>
       <input type="number" id="input" max="1000" />
       <p id="indicator"></p>
       <button id="restart" style="display:none">Start Again</button>
     </div>
-    <div></div>
+    <div id="guessedNumbers">
+      <h1>Guessed:</h1>
+      <ol id="orderedList"></ol>
+    </div>
   </body>
   <script src="app.js"></script>
 </html>
