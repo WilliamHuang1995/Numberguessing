@@ -1,31 +1,31 @@
 var myNumber = generateNewNumber();
 console.log(myNumber);
 var previousNumber;
-var input = document.getElementById('guessedNumber');
+var input = document.getElementById('input');
 var indicator = document.getElementById('indicator');
 var body = document.getElementsByTagName('BODY')[0];
 var restart = document.getElementById('restart');
 var first = document.getElementById('first');
-var guessedNumber;
+var input;
 
 input.addEventListener('keypress', e => {
   if (e.keyCode !== 13) return;
   //get the guessed number
   first.style.display = 'none';
-  guessedNumber = Number(document.getElementById('guessedNumber').value);
+  input = Number(document.getElementById('input').value);
   setColor();
   // if guessed number is smaller the correct answer
-  if (guessedNumber < myNumber) {
+  if (input < myNumber) {
     indicator.innerText = 'Too Low';
     input.value = '';
   }
   // if the guessed number is larger
-  else if (guessedNumber > myNumber) {
+  else if (input > myNumber) {
     indicator.innerText = 'Too High';
     input.value = '';
   }
   // NaN
-  else if (Number.isNaN(guessedNumber)) {
+  else if (Number.isNaN(input)) {
     indicator.innerText = 'Not a Number!';
     input.value = '';
     return;
@@ -42,7 +42,7 @@ input.addEventListener('keypress', e => {
     first.style.display = 'block';
   }
 
-  previousNumber = guessedNumber;
+  previousNumber = input;
 });
 
 restart.addEventListener('click', () => {
@@ -55,12 +55,10 @@ restart.addEventListener('click', () => {
 });
 
 function setColor() {
-  console.log(previousNumber);
-  console.log(typeof guessedNumber);
   //absolute value
   if (previousNumber) {
     var pdistance = Math.abs(previousNumber - myNumber);
-    var cdistance = Math.abs(guessedNumber - myNumber);
+    var cdistance = Math.abs(input - myNumber);
 
     if (pdistance > cdistance) {
       //hotter
